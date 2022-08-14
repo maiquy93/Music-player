@@ -1,0 +1,203 @@
+html {
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.player {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.dashboard {
+  padding: 16px 0px;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 480px;
+  border-bottom: 1px solid #ebebeb;
+}
+header {
+  text-align: center;
+  margin-bottom: 0px;
+  animation-name: floatText;
+  animation-duration: 10s;
+}
+header h4 {
+  color: red;
+  font-size: 14px;
+}
+h2 {
+  color: rgb(78, 72, 72);
+  animation-name: floatText;
+  animation-duration: 10s;
+  animation-delay: initial;
+  font-size: 16px;
+}
+.cd {
+  display: flex;
+  margin: auto;
+  width: 150px;
+  transform: rotate(0deg);
+  animation-name: spin;
+  animation-duration: 80s;
+  animation-iteration-count: infinite;
+  transition: ease 0.8;
+  animation-delay: initial;
+  animation: name duration timing-function delay iteration-count direction
+    fill-mode;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes floatText {
+  from {
+    left: 0px;
+  }
+  to {
+    right: 0px;
+  }
+}
+.cd-thumb {
+  width: 100%;
+  padding-top: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  background-size: cover;
+  margin: auto;
+}
+
+.control {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around; /*can dau cac flex item*/
+  padding: 18px 0px 8px 0;
+}
+.process {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+}
+.time {
+  padding-left: 30px;
+}
+.progress {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 8px;
+  background: #d3d3d3;
+  /* background-color: aqua; */
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+/* .progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 6px;
+  background-color: var(--primary-color);
+  cursor: pointer;
+} */
+.control .btn {
+  color: #666;
+  padding: 18px;
+  font-size: 18px;
+}
+.control .icon-pause {
+  display: none;
+}
+.playlist {
+  margin-top: 400px;
+  /* margin: 10px; */
+  /* position: fixed; */
+  padding: 12px;
+}
+.song {
+  width: 100%;
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: space-around; */
+  margin-bottom: 12px;
+  background-color: #fff;
+  padding: 8px 16px;
+  border-radius: 5px;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+.song .thumb {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-size: cover;
+  margin: 0 10px;
+  object-fit: cover;
+}
+.song .body {
+  flex: 1;
+  padding: 0 16px;
+}
+
+.song .title {
+  font-size: 18px;
+  color: var(--text-color);
+}
+
+.song .author {
+  font-size: 10px;
+  color: #999;
+}
+
+.song .option {
+  padding: 16px 8px;
+  color: #999;
+  font-size: 18px;
+}
+/*Responsive For mobile phones: */
+[class*="col-"] {
+  width: 100%;
+}
+@media only screen and (min-width: 414px) {
+  /* For tablets: */
+  .col-s-1 {
+    width: 8.33%;
+  }
+  .col-s-2 {
+    width: 16.66%;
+  }
+  .col-s-3 {
+    width: 25%;
+  }
+  .col-s-4 {
+    width: 33.33%;
+  }
+  .col-s-5 {
+    width: 41.66%;
+  }
+  .col-s-6 {
+    width: 50%;
+  }
+  .col-s-7 {
+    width: 58.33%;
+  }
+  .col-s-8 {
+    width: 66.66%;
+  }
+  .col-s-9 {
+    width: 75%;
+  }
+  .col-s-10 {
+    width: 83.33%;
+  }
+  .col-s-11 {
+    width: 91.66%;
+  }
+  .col-s-12 {
+    width: 100%;
+  }
+}

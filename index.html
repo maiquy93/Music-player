@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <div class="player col-">
+      <!-- Dashboard -->
+      <div class="dashboard col-">
+        <!-- Header -->
+        <header>
+          <h4 id="h4">Now playing:</h4>
+          <h2>String 57th & 9th</h2>
+        </header>
+
+        <!-- CD -->
+        <div class="cd">
+          <div
+            class="cd-thumb"
+            style="
+              background-image: url('https://media-cdn-v2.laodong.vn/storage/newsportal/2018/9/24/632529/85476Dd0a4d25f.Img.jpg');
+            "
+          ></div>
+        </div>
+        <!-- Control -->
+        <div class="control col-">
+          <div class="btn btn-repeat">
+            <i class="fa-solid fa-arrow-rotate-right"></i>
+          </div>
+          <div onclick="prev()" class="btn btn-prev">
+            <i class="fas fa-step-backward"></i>
+          </div>
+          <div class="btn btn-toggle-play">
+            <i onclick="pause()" class="fas fa-pause icon-pause"></i>
+            <i onclick="playing()" class="fas fa-play icon-play"></i>
+          </div>
+          <div onclick="next()" class="btn btn-next">
+            <i class="fas fa-step-forward"></i>
+          </div>
+          <div class="btn btn-random">
+            <i class="fas fa-random"></i>
+          </div>
+        </div>
+        <div class="process">
+          <input
+            id="progress"
+            class="progress"
+            type="range"
+            value="0"
+            step="1"
+            min="0"
+            max="100"
+          />
+          <p class="time">time</p>
+        </div>
+        <audio id="audio" src="./songs/giot nang ben them.mp3"></audio>
+      </div>
+
+      <!-- Playlist -->
+      <div class="playlist">
+        <div class="song">
+          <div
+            class="thumb"
+            style="
+              background-image: url('https://nguoinoitieng.tv/images/nnt/93/2/a9nh.jpg');
+            "
+          ></div>
+          <div class="body">
+            <h3 class="title">sda</h3>
+            <p class="author">dasd</p>
+          </div>
+          <div class="option">
+            <i class="fas fa-ellipsis-h"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </head>
+  <body>
+  </body>
+  <script>
+    const $ = document.querySelector.bind(document);
+    const $$ = document.querySelectorAll.bind(document);
+    const songs = [
+      {
+        name: "Chỉ còn những mùa nhớ",
+        singer: "Bảo Trâm",
+        path: "./MusicPlayer/songs/chi con nhung mua nho.mp3",
+      },
+      {
+        name: "Em đã thuộc về ai",
+        singer: "Bảo Trâm",
+        path: "./MusicPlayer/songs/em da thuoc ve ai.mp3",
+      },
+      {
+        name: "Giọt nắng bên thềm",
+        singer: "Bảo Trâm",
+        path: "./MusicPlayer/songs/giot nang ben them.mp3",
+      },
+      {
+        name: "Ngày chưa giông bão",
+        singer: "Bảo Trâm",
+        path: "./MusicPlayer/songs/ngay chua giong bao.mp3",
+      },
+      {
+        name: "Sẽ thôi chờ mong",
+        singer: "Bảo Trâm",
+        path: "./MusicPlayer/songs/se thoi cho mong.mp3",
+      },
+      {
+        name: "Thu Cạn",
+        singer: "Bảo Trâm",
+        path: "./MusicPlayer/songs/thu can.mp3",
+      },
+    ];
+    const app = {
+      currentIndex: 0,
+      songs: [
+        {
+          name: "Chỉ còn những mùa nhớ",
+          singer: "Bảo Trâm",
+          path: "./songs/song1.mp3",
+        },
+        {
+          name: "Em đã thuộc về ai",
+          singer: "Bảo Trâm",
+          path: "./songs/em da thuoc ve ai.mp3",
+        },
+        {
+          name: "Giọt nắng bên thềm",
+          singer: "Bảo Trâm",
+          path: "./songs/giot nang ben them.mp3",
+        },
+        {
+          name: "Ngày chưa giông bão",
+          singer: "Bảo Trâm",
+          path: "./songs/ngay chua giong bao.mp3",
+        },
+        {
+          name: "Sẽ thôi chờ mong",
+          singer: "Bảo Trâm",
+          path: "./songs/se thoi cho mong.mp3",
+        },
+        {
+          name: "Thu Cạn",
+          singer: "Bảo Trâm",
+          path: "./songs/thu can.mp3",
+        },
+      ],
+      render: function () {
+        //dừng animation
+        $(".cd").style.animationPlayState = "paused";
+        //this là object app
+        const song = this.songs.map((ele, index) => {
+          return `<div class="song">
+          <div
+            class="thumb"
+            style="
+              background-image: url('https://nguoinoitieng.tv/images/nnt/93/2/a9nh.jpg');
+            "
+          ></div>
+          <div class="body">
+            <h3 class="title song-${index}">${ele.name}</h3>
+            <p class="author">${ele.singer}</p>
+          </div>
+          <div class="option">
+            <i class="fas fa-ellipsis-h"></i>
+          </div>
+        </div>`;
+        });
+        const playlistElement = $(".playlist");
+        playlistElement.innerHTML = song.join("");
+      },
+      //dinh nghia ra thuoc tinh moi tren doi tuong currentIndex
+      defineProperties: function () {
+        Object.defineProperty(this, "currentSong", {
+          get: function () {
+            return this.songs[this.currentIndex];
+          },
+          // value: "Test",
+          // writable: true,
+        });
+      },
+      handleEvents: function () {
+        const cdEle = $(".cd");
+        cdWid = cdEle.offsetWidth;
+        document.onscroll = function () {
+          const dashscale =
+            window.scrollY || document.documentElement.scrollTop;
+          const newcdWid = cdWid - dashscale;
+          cdEle.style.width = newcdWid > 0 ? `${newcdWid}px` : 0;
+          cdEle.style.opacity = 0.1 + newcdWid / cdWid;
+        };
+      },
+      start: function () {
+        this.handleEvents(); //lang nghe su kien
+        this.render(); //render view
+        this.defineProperties(); //dinh nghia thuoc tinh currentSong
+        this.loadingfile(); //Load file vao player
+      },
+      loadingfile: function () {
+        const audio = document.getElementById("audio");
+        const header = $("header h2");
+        header.innerText = this.currentSong.name;
+        audio.src = this.currentSong.path;
+      },
+    };
+    app.start();
+    const pauseIcon = document.querySelector(".icon-pause");
+    const playIcon = document.querySelector(".icon-play");
+    var audio = document.getElementById("audio");
+
+    function playing() {
+      const pauseIcon = document.querySelector(".icon-pause");
+      const playIcon = document.querySelector(".icon-play");
+      $(".cd").style.animationPlayState = "running";
+      audio.play();
+      document.querySelector(".icon-pause").style.display = "block";
+      playIcon.style.display = "none";
+      document.querySelector("header h4").style.color = "green";
+      var currentText = ($(`.song-${app.currentIndex}`).style.color = "blue");
+    }
+    function pause() {
+      const pauseIcon = document.querySelector(".icon-pause");
+      const playIcon = document.querySelector(".icon-play");
+      audio.pause();
+      document.querySelector(".icon-pause").style.display = "none";
+      playIcon.style.display = "block";
+      document.querySelector("header h4").style.color = "red";
+      $(".cd").style.animationPlayState = "paused";
+    }
+    function next() {
+      app.currentIndex = app.currentIndex + 1;
+      if (app.currentIndex > app.songs.length - 1) {
+        app.currentIndex = 0;
+        $(`.song-${app.songs.length - 1}`).style.color = "black";
+      }
+      app.loadingfile();
+      playing();
+      var currentText = ($(`.song-${app.currentIndex}`).style.color = "blue");
+      var beforeText = $(`.song-${app.currentIndex - 1}`);
+      if (beforeText) {
+        beforeText.style.color = "black";
+      } else {
+        currentText = "blue";
+      }
+    }
+    function prev() {
+      app.currentIndex = app.currentIndex - 1;
+      if (app.currentIndex < 0) {
+        app.currentIndex = 0;
+      }
+      app.loadingfile();
+      playing();
+      var currentText = ($(`.song-${app.currentIndex}`).style.color = "blue");
+      var beforeText = $(`.song-${app.currentIndex + 1}`);
+      if (beforeText) {
+        beforeText.style.color = "black";
+      } else {
+        currentText = "blue";
+      }
+    }
+    function progress() {
+      audio.ontimeupdate = function () {
+        var currentTime = audio.currentTime;
+        var process = (currentTime + 0) / audio.duration;
+        if (process) {
+          $(".progress").value = process * 100;
+        }
+        $(".time").innerText = Math.trunc(currentTime);
+      };
+    }
+    progress();
+  </script>
+</html>
